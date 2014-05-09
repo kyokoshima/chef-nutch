@@ -6,6 +6,6 @@ description      'Installs/Configures nutch'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.1.0'
 
-%w[java].each do |pkg|
+%w[java ant].each do |pkg|
 	depends pkg
 end

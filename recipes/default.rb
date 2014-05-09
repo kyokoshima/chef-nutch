@@ -15,3 +15,9 @@ node.default["nutch"]["remote_file"] = "apache-nutch-2.2.1-src.tar.gz"
 remote_file "/tmp/#{node['nutch']['remote_file']}" do
 	source "#{node['nutch']['remote_site']}/#{node['nutch']['remote_file']}"
 end
+
+include_recipe "ant::install_source"
+
+ant_library "ant-contrib" do
+				url "http://search.maven.org/remotecontent?filepath=ant-contrib/ant-contrib/20020829/ant-contrib-20020829.jar"
+end
