@@ -1,3 +1,11 @@
+execute "ant-build" do
+	command <<-EOH
+		cd #{node['work_dir']}/#{node['nutch']['base_name']}-#{node['nutch']['version']}
+		ant clean runtime
+	EOH
+	action :nothing
+end
+
 template "nutch-site.xml" do
 	source "nutch-site.xml.erb"
 	path "#{node['work_dir']}/#{node['nutch']['base_name']}-#{node['nutch']['version']}/conf/nutch-site.xml"
@@ -22,6 +30,7 @@ execute "extract_nutch" do
 	notifies :create, resources(:template=>"nutch-site.xml")
 	notifies :create, resources(:template=>"gora.properties")
 	notifies :create, resources(:template=>"ivy.xml")
+	notifies :run, resources(:execute=> "ant-build")
 	not_if { File.exist?("#{node['nutch']['work_dir']}/#{node['nutch']['base_name']}-#{node['nutch']['version']}") }
 	action :nothing
 end
