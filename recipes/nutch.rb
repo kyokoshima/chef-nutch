@@ -14,7 +14,7 @@ execute "seed_create" do
 	EOH
 	action :nothing
 	not_if { File.exist?("#{node['nutch']['work_dir']}/#{node['nutch']['base_name']}-#{node['nutch']['version']}/runtime/local/urls") }
-	notifies, :run, resouces(:execute => "start_crawl")
+	notifies :run, resources(:execute => "start_crawl")
 end
 
 execute "ant-build" do

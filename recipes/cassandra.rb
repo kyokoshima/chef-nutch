@@ -4,7 +4,7 @@ execute "execute_cassandra" do
 		sudo bin/cassandra
 	EOH
 	not_if "pgrep -fl cassandra"
-	# action :nothing
+	action :nothing
 end
 
 execute "extract_cassandra" do
